@@ -1,0 +1,9 @@
+# Test korpusu - yerel test verisi, repoya dahil edilmez
+# Her kullanici kendi sisteminden kendi test korpusunu uretir
+tests/corpus/clean/
+tests/corpus/positive/
+tests/corpus/obfuscated/
+
+# Genel gecici dosyalar
+*.compiled
+/tmp/
