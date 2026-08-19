@@ -5,28 +5,36 @@ Analysis Report (MAR) veya Cybersecurity Advisory (CSA) belgesinden
 elle çıkarılmıştır. Asağıdaki tablo hangi kuralın hangi rapordan
 geldiğini gösterir.
 
-| Rapor No | Yayın/Güncelleme Tarihi | Konu | Platform | Kural Sayısı | Dosya |
+| Rapor No | Yayın/Guncelleme Tarihi | Konu | Platform | Kural Sayisi | Dosya |
 |---|---|---|---|---|---|
 | MAR-10430311.c1.v1 | 2023-09-07 | Meterpreter + ASPX Webshell | Windows PE / ASPX | 3 | rules/CISA_10430311_Meterpreter_ASPXWebshell.yar |
 | MAR-25993211.r1.v1 | 2025-03-28 | RESURGE + SPAWNSLOTH (Ivanti Connect Secure) | Linux ELF | 2 | rules/CISA_25993211_RESURGE_SPAWNSLOTH.yar |
 | AA23-352A | 2025-06-04 (guncelleme) | Play Ransomware (ESXi) + GRXBA infostealer | Linux ELF / Windows PE | 2 | rules/CISA_AA23-352A_PlayRansomware_GRXBA.yar |
+| AR25-338A | 2026-02-11 (son guncelleme) | BRICKSTORM backdoor (PRC devlet destekli, VMware/Windows) | Linux ELF (Go/Rust/.NET AOT) | 7 | rules/CISA_AR25-338A_BRICKSTORM.yar |
 
 ## Kaynak URL
 - MAR-10430311.c1.v1: https://www.cisa.gov/sites/default/files/2023-09/MAR-10430311.c1.v1.CLEAR_.pdf
 - MAR-25993211.r1.v1: https://www.cisa.gov/sites/default/files/2025-03/MAR-25993211.r1.v1.CLEAR_.pdf
 - AA23-352A: https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-352a
+- AR25-338A: https://media.defense.gov/2025/Dec/04/2003834878/-1/-1/0/MALWARE-ANALYSIS-REPORT-BRICKSTORM-BACKDOOR.PDF
 
 ## Notlar
 - CISA'nin kendi raporlari arasinda metadata alan isimlendirmesinde
   tutarsizlik var (ornegin "Capabilities" ile "capabilities" farkli
   raporlarda farkli büyük/kucuk harfle geçiyor). Kurallar orijinal
-  kaynaga sadik kalinarak degistirilmeden aktarilmistir.
-- AA23-352A raporunda ayrica Suricata (ag imzasi) kurallari da
-  bulunmaktaydi; bu depo sadece YARA formatindaki kurallari icerir,
-  Suricata kurallari kapsam disi birakilmistir.
+  kaynaga sadik kalinarak degistirilmemistir.
+- AA23-352A raporunda ayrica Suricata (ag imzasi), AR25-338A raporunda
+  ayrica Sigma (SIEM) kurallari da bulunmaktaydi; bu depo sadece YARA
+  formatindaki kurallari icerir, digerleri kapsam disi birakilmistir.
 - AA23-352A raporundaki $PLAY_ext_str kuralinda kaynak sayfada
   "fullword?" seklinde bir yazim hatasi tespit edildi, "fullword"
-  olarak duzeltildi (YARA'da gecerli bir modifier olmadigi icin).
+  olarak duzeltildi.
+- AR25-338A raporundaki CISA_251155_02 kuralinda kaynak PDF'de sha256_1
+  alani 4 kez tekrar tanimlanmisti (CISA'nin kendi hatasi); YARA ayni
+  meta anahtarinin tekrarina izin vermedigi icin sha256_1/_2/_3/_4
+  olarak ayristirildi.
+- AR25-338A, PRC (Cin) devlet destekli bir APT grubuna ait, en guncel
+  (2026-02-11) ve en yuksek kural sayisina (7) sahip kaynagimizdir.
 
 ## Lisans notu
 CISA raporlari TLP:CLEAR olarak yayinlanir ve "Subject to standard
