@@ -41,3 +41,25 @@ CISA raporlari TLP:CLEAR olarak yayinlanir ve "Subject to standard
 copyright rules, TLP:CLEAR information may be shared without
 restriction" ifadesiyle serbestce paylasilabilir statudedir. ABD federal
 hukumet eseri olmasi nedeniyle kamu mali (public domain) kabul edilir.
+
+## Guncelleme - 5. Kaynak
+
+| Rapor No | Yayin/Guncelleme Tarihi | Konu | Platform | Kural Sayisi | Dosya |
+|---|---|---|---|---|---|
+| AA23-158A | 2023-06-07 | LEMURLOOT webshell (CL0P / MOVEit Transfer istismari) | ASPX / Windows | 1 | rules/CISA_10450442_LEMURLOOT_MOVEit.yar |
+
+Kaynak URL: https://www.cisa.gov/sites/default/files/2023-07/aa23-158a-stopransomware-cl0p-ransomware-gang-exploits-moveit-vulnerability_8.pdf
+
+## Guncelleme - 6. Kaynak
+
+| Rapor No | Yayin/Guncelleme Tarihi | Konu | Platform | Kural Sayisi | Dosya |
+|---|---|---|---|---|---|
+| MAR-261290.r1.v1 (AR26-113A) | 2026-04-19 | FIRESTARTER backdoor (Cisco Firepower/ASA, UAT-4356/ArcaneDoor APT) | Linux ELF (Cisco firmware) | 2 | rules/CISA_MAR-261290_FIRESTARTER.yar |
+
+Kaynak URL: https://www.cisa.gov/news-events/analysis-reports/ar26-113a
+
+Not: Bu kaynak STIX 2.1 formatinda elde edilmistir, PDF degil. Kaynak
+metinde kucuk bir yazim hatasi (tool_type = "unknownk") ve YARA'da
+gecersiz string isimlendirmesi ($1, $2) tespit edildi, sirasiyla
+"unknown" ve $s1/$s2 olarak duzeltildi. Bu kaynakta sha256 hash
+bilgisi paylasilmamis, kaynaga sadik kalinarak eklenmedi.
