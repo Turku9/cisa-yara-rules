@@ -79,3 +79,20 @@ docs/RULE_STANDARD.md'de tanimladigimiz "dosya tipi filtresi zorunlu"
 prensibine CISA'nin kendi kurallari arasinda en iyi uyan orneklerden biri.
 HermeticWiper kategorisi (wiper - veri yok etme, fidye talep etmeyen)
 depoya yeni bir tehdit tipi cesitliligi katmaktadir.
+
+## Guncelleme - 8. Kaynak
+
+| Rapor No | Yayin Tarihi | Konu | Platform | Kural Sayisi | Dosya |
+|---|---|---|---|---|---|
+| MAR-10454006-r1.v2 (AR23-209A) | 2023-07-31 | SUBMARINE backdoor (Barracuda ESG, CVE-2023-2868 zero-day, UNC4841) | Linux/Unix shell script + SQL trigger | 7 | rules/CISA_10454006_SUBMARINE_Barracuda.yar |
+
+Kaynak URL: https://www.cisa.gov/news-events/analysis-reports/ar23-209a
+
+Not: Bu kaynak, depodaki en teknik cesitliligi yuksek kaynaklardan biri.
+Yedi kural, tek bir saldiri zincirinin farkli asamalarini yakalıyor:
+giris noktasi (email eki), kalicilik script'leri, bir SQL trigger
+tabanli kendi-kendini-onaran mekanizma, ve asil backdoor. Ayrica
+CISA_10454006_02 kurali depodaki tek "import math" + entropi tabanli
+(math.entropy() > 5.8) kural - encode/sikistirilmis payload'lari
+string aramadan bagimsiz olarak, istatistiksel rastgelelige bakarak
+tespit ediyor. Bu, obfuscation testi bolumunde referans alinacak.
