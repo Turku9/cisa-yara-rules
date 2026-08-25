@@ -96,3 +96,29 @@ CISA_10454006_02 kurali depodaki tek "import math" + entropi tabanli
 (math.entropy() > 5.8) kural - encode/sikistirilmis payload'lari
 string aramadan bagimsiz olarak, istatistiksel rastgelelige bakarak
 tespit ediyor. Bu, obfuscation testi bolumunde referans alinacak.
+
+## Guncelleme - 9. Kaynak (HEDEF TAMAMLANDI)
+
+| Rapor No | Yayin Tarihi | Konu | Platform | Kural Sayisi | Dosya |
+|---|---|---|---|---|---|
+| MAR-251126.r1.v1 (AR25-261A) | 2025-09-03 | Ivanti EPMM Malicious Listener (CVE-2025-4427/4428, parcali JAR teslimati) | Java (JAR/.class) | 5 | rules/CISA_MAR-251126_IvantiEPMM.yar |
+
+Kaynak URL: https://www.cisa.gov/news-events/analysis-reports/ar25-261a
+
+Not: Bu kaynak STIX 2.1 formatinda tam ve eksiksiz elde edildi (kullanici
+tarafindan CISA web sayfasindan STIX JSON indirilerek saglandi - PDF bot
+korumasi asilamadigi icin). Saldiri, iki Ivanti EPMM CVE'sinin (kimlik
+dogrulama atlatma + kod enjeksiyonu) zincirlenmesiyle gerceklesti; payload
+JAR dosyalari HTTP GET istekleriyle base64 parcalar halinde teslim edildi
+(MITRE T1027.004). Kurallar, Java reflection tabanli bir enjeksiyon
+zincirinin bes farkli asamasini (disari kabuk JAR, enjektor class,
+dinleyici backdoor, ikinci varyant) yakaliyor. Bu kaynak, depodaki
+JAR/konteyner format kor noktasi bulgusuyla (bkz. CONTAINER_FORMAT_FINDINGS.md)
+dogrudan iliskili gercek dunya ornegidir.
+
+---
+
+# HEDEF TAMAMLANDI: 9 kaynak, 30 kural
+
+Bu noktada kaynak toplama fazi durduruldu. Sirada: genisletilmis FP testi,
+gercek .jar dosyalariyla konteyner testi, ve resmi obfuscation testi turu.
