@@ -63,3 +63,19 @@ metinde kucuk bir yazim hatasi (tool_type = "unknownk") ve YARA'da
 gecersiz string isimlendirmesi ($1, $2) tespit edildi, sirasiyla
 "unknown" ve $s1/$s2 olarak duzeltildi. Bu kaynakta sha256 hash
 bilgisi paylasilmamis, kaynaga sadik kalinarak eklenmedi.
+
+## Guncelleme - 7. Kaynak
+
+| Rapor No | Yayin Tarihi | Konu | Platform | Kural Sayisi | Dosya |
+|---|---|---|---|---|---|
+| AR22-115A | 2022-04-05 | HermeticWiper (Ukrayna'ya karsi kullanilan veri silme yazilimi) | Windows PE | 1 | rules/CISA_10375867_HermeticWiper.yar |
+
+Kaynak URL: https://www.cisa.gov/uscert/ncas/analysis-reports/ar22-115a
+
+Not: Bu kural, depodaki en iyi yapilandirilmis CISA kurallarindan biri -
+uint16(0) == 0x5A4D ile PE dosya tipi kontrolu yapiyor, iki ayri string
+grubundan (rsrc ve s) esik degerine gore es zamanli eslesme ariyor. Bu,
+docs/RULE_STANDARD.md'de tanimladigimiz "dosya tipi filtresi zorunlu"
+prensibine CISA'nin kendi kurallari arasinda en iyi uyan orneklerden biri.
+HermeticWiper kategorisi (wiper - veri yok etme, fidye talep etmeyen)
+depoya yeni bir tehdit tipi cesitliligi katmaktadir.
