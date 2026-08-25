@@ -86,3 +86,37 @@ Sifir gercek eslesme. Ancak 167 performans uyarisi tespit edildi:
 - Kural sayisi: 7
 - FP: 0/677
 - Performans uyarisi: 167 (esas olarak 1 kuraldan kaynaklanan bilinen durum)
+
+## FP (False Positive) Testi #3 - Tam Kural Seti (30 Kural, 9 Kaynak)
+
+**Tarih:** 2026-08-25
+**Test edilen kural sayisi:** 30 (9 kaynak dosyasi, 9 CISA raporu - hedef tamamlandi)
+**Korpus:** Genisletilmis - 697 dosya (500 ELF, 77 text, 100 PHP, 20 Java/JAR)
+
+### Sonuc
+
+Sifir gercek eslesme. 174 performans uyarisi (onceki testle ayni iki
+kuraldan kaynaklanan bilinen durum - CISA_10430311_01 ve PlayForESXi).
+
+### Yorum
+
+- Ivanti EPMM kurallari (CISA_251126_01 - 05) ilk kez Java/JAR
+  korpusuna karsi test edildi ve temiz cikti. Bu onemli, cunku bu
+  kurallar .class dosyasi ic verisini hedefliyor - yanlislikla
+  meşru JAR dosyalarinda tetiklenme riski digerlerinden yuksekti.
+- SUBMARINE'in entropi tabanli kurali (CISA_10454006_02) de temiz
+  cikti - korpustaki dosyalar entropi esigini (5.8) asmadi.
+- **Onemli not:** Bu test hala YARA'nin ham dosya okuma sinirlamasina
+  tabi. Java kurallarimiz .class dosyasi icerigini hedefliyor ama
+  test korpusundaki JAR dosyalari SIKISTIRILMIS haldeydi ve ACILMADAN
+  tarandi (bkz. CONTAINER_FORMAT_FINDINGS.md). Yani bu "temiz" sonuc,
+  kismen JAR'larin icini hic gormemis olmamizdan da kaynaklaniyor
+  olabilir - FP yoklugu kesin degil, dogrulanmis konteyner testi
+  asagida ayrica yapilacak.
+
+### Guncellenmis Toplam
+
+- Kaynak sayisi: 9
+- Kural sayisi: 30
+- FP (ham dosya taramasi): 0/697
+- Performans uyarisi: 174 (2 bilinen kuraldan)
