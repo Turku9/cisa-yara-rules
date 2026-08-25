@@ -79,3 +79,40 @@ kullanilarak asagidaki kanit elde edildi:
 - Ic ice gecmis arsivleri (zip icinde zip) su an tek seviye aciyor,
   recursive degil. Ileride gerekirse eklenebilir.
 - .rar, .7z gibi ZIP-disi arsiv formatlari desteklenmiyor.
+
+## Gercek JAR Dosyalariyla Dogrulama Testi (2026-08-25)
+
+**Onceki not artik kapatildi:** FP testi #3'te "JAR'lar acilmadan tarandi,
+FP yoklugu kesin degil" notu dusulmustu. Bu test o notu cozuyor.
+
+**Metodoloji:** 14 gercek, meşru Java kutuphanesi (Apache Commons Codec,
+Apache Commons HTTPClient, Apache Commons Logging, DirBuster, Jericho HTML
+Parser, JavaHelp - jh/jhall/jhbasic, java-getopt, BrowserLauncher2,
+JLFGR/looks, Swing Layout Extensions) `tools/scan_with_extraction.sh`
+script'i ile tarandi - hem ham (acilmamis) hem acilmis icerik olarak.
+
+**Not:** Test korpusu olusturulurken sistemde bulunan CVE-*.jar ve
+plugin-metasploit.jar dosyalari (bilinen exploit araclari) ve tarafsiz
+olmayan bir kisisel/is dosyasi ("...FIYAT TEKLIFI..." isimli) test
+korpusundan cikarilmistir - bunlar "temiz/masum yazilim" tanimina
+uymuyor ve testin gecerliligini bozardi.
+
+### Sonuc
+
+| Test | Dosya Sayisi | Eslesme | Hata |
+|---|---|---|---|
+| Ham JAR taramasi | 14 | 0 | yok |
+| Acilmis JAR icerigi taramasi | 14 | 0 | yok |
+
+**30 kuralin hicbiri, gercek/mesru JAR kutuphanelerinde (ne ham ne
+acilmis halde) yanlis alarm uretmedi.** scan_with_extraction.sh
+script'i 14 dosyada da hatasiz calisti - arastirma/kanit asamasindan
+cikip dogrulanmis bir arac haline geldi.
+
+### Guncellenmis Durum
+
+- Konteyner kor noktasi: KANITLANMIS (bkz. yukaridaki bolum)
+- Cozum: scan_with_extraction.sh - artik hem demo hem gercek veriyle
+  DOGRULANMIS
+- FP riski (JAR formati ozelinde): 0/14 gercek kutuphane, hem ham hem
+  acilmis halde
