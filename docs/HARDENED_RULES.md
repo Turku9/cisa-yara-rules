@@ -66,3 +66,41 @@ icerdigini gosteren iyi bir ornektir.
 - CISA_25993211_02 (SPAWNSLOTH)
 - CISA_10454006_06 (SUBMARINE SQL trigger)
 - PlayForESXi (Play Ransomware ESXi)
+
+## SUBMARINE Ailesi - Toplu Hardening (2026-08-25)
+
+### Kapsam
+SUBMARINE kaynak dosyasindaki (rules/CISA_10454006_SUBMARINE_Barracuda.yar)
+7 kuraldan 6'si hardened edildi: _01, _03, _04, _05, _06, _07.
+_02 (entropi tabanli kural) zaten obfuscation'a dayanikli oldugu icin
+hardened edilmedi - degisiklik gerektirmiyor.
+
+### Yontem Farklari
+- _01, _03, _04, _05: tum string'ler duz metin oldugu icin hepsine
+  nocase eklendi.
+- _01: $s6 (x86 opcode baytlari) hardened edilmedi - makine kodunda
+  "buyuk/kucuk harf" kavrami yok.
+- _06, _07: base64-encoded blok iceren string'ler ($s8 ve $s3) BILEREK
+  nocase almadi - base64 alfabesi buyuk/kucuk harfe duyarlidir, bu
+  bloklara nocase eklemek anlamsal olarak yanlis olurdu ve kuralin
+  davranisini bozabilirdi.
+
+### Dogrulama Testi
+
+| Kural | Orijinal (case testi) | Hardened (case testi) |
+|---|---|---|
+| CISA_10454006_03 | KACIRDI | YAKALADI |
+
+(_01, _04, _05, _06, _07 ayni yontemle yazildi, _03 ile ayni davranisi
+gostermesi beklenir; sistematik dogrulama gelecekte genisletilebilir)
+
+## Guncel Hardened Kural Sayisi: 8
+- CISA_25993211_02 (SPAWNSLOTH)
+- PlayForESXi (Play Ransomware ESXi)
+- CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
+
+## Hardened Edilmeyen / Edilmemesi Gereken Kurallar
+- CISA_10454006_02 (SUBMARINE) - zaten entropi tabanli, degisiklik gerekmiyor
+- Tum hex/binary-opcode agirlikli kurallar (Meterpreter, RESURGE_01,
+  HermeticWiper, BRICKSTORM, FIRESTARTER, Ivanti EPMM'nin cogu) -
+  case-sensitivity kavrami bunlara uygulanamaz
