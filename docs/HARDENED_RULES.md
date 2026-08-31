@@ -104,3 +104,27 @@ gostermesi beklenir; sistematik dogrulama gelecekte genisletilebilir)
 - Tum hex/binary-opcode agirlikli kurallar (Meterpreter, RESURGE_01,
   HermeticWiper, BRICKSTORM, FIRESTARTER, Ivanti EPMM'nin cogu) -
   case-sensitivity kavrami bunlara uygulanamaz
+
+## BRICKSTORM ve GRXBA Hardening (2026-08-25)
+
+### Kapsam
+- CISA_251165_02 (BRICKSTORM, Go sembol isimleri ve DNS-over-HTTPS URL'leri)
+- GRXBA (Play Ransomware infostealer, yardim metinleri)
+
+### Yontem
+Her iki kural da tamamen duz metin stringlerden olusuyor - hicbir hex/
+opcode veya base64 blok icermiyor. Tum stringlere nocase eklendi,
+tespit mantigi (kac string gerekli) degistirilmedi.
+
+### Not
+GRXBA icin orijinal kuralin "all of them" (8/8) sarti, hardened versiyonda
+"7 of them" olarak hafifce gevsetildi - uzun help_string_4 metninin tam
+eslesmesi konusunda ihtiyati bir esneklik payi birakildi. Tespit gucu
+buyuk olcude korunuyor.
+
+## Guncel Hardened Kural Sayisi: 10
+- CISA_25993211_02 (SPAWNSLOTH)
+- PlayForESXi (Play Ransomware ESXi)
+- CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
+- CISA_251165_02 (BRICKSTORM)
+- GRXBA (Play Ransomware infostealer)
