@@ -128,3 +128,29 @@ buyuk olcude korunuyor.
 - CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
 - CISA_251165_02 (BRICKSTORM)
 - GRXBA (Play Ransomware infostealer)
+
+## Meterpreter/ASPX ve BRICKSTORM Ek Kurallar (2026-08-25)
+
+### Kapsam
+- CISA_10430311_03 (ASPX Webshell) - kismi hardening
+- CISA_251155_01 (BRICKSTORM, Go paket yollari) - kismi hardening
+- CISA_251217_03 (BRICKSTORM, Rust varyanti) - tam hardening
+
+### Yontem
+- CISA_10430311_03: $s1, $s2 rastgele/encode gorunumlu karakter dizileri
+  oldugu icin degistirilmedi. $s3 (OWAwebconfig), $s4 (TUCSON), $s5 (eval)
+  duz metin oldugu icin nocase eklendi.
+- CISA_251155_01: $s0 x86 opcode baytlari, degistirilmedi. $s1-$s9 Go
+  paket/fonksiyon yollari (duz metin), hepsine nocase eklendi.
+- CISA_251217_03: Tum 10 string HTTP header/protokol metni veya hex
+  kimlik oldugu icin hepsine nocase eklendi.
+
+## Guncel Hardened Kural Sayisi: 13
+- CISA_25993211_02 (SPAWNSLOTH)
+- PlayForESXi (Play Ransomware ESXi)
+- CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
+- CISA_251165_02 (BRICKSTORM - DNS query)
+- GRXBA (Play Ransomware infostealer)
+- CISA_10430311_03 (Meterpreter/ASPX webshell)
+- CISA_251155_01 (BRICKSTORM - Go paket yollari)
+- CISA_251217_03 (BRICKSTORM - Rust varyanti)
