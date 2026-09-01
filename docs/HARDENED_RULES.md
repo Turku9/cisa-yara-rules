@@ -294,3 +294,40 @@ gozden kacan wide-encoded kural KALMADIGI dogrulanmis oldu - tarama
 BRICKSTORM ailesinin tum 7 kurali artik degerlendirildi:
 _251165_02, _251155_01, _251217_03, _261234_01 (4 tanesi hardened)
 _251155_02, _251155_03, _251186_02 (3 tanesi opcode agirlikli, N/A)
+
+## BRICKSTORM Son Kural: _261234_01 (2026-08-25)
+
+### Bulus Yontemi
+Kalan tum kurallar, otomatik bir Python script'i ile UTF-16 (wide)
+formatli gizli string'ler acisindan sistematik olarak tarandi. Bu
+tarama, daha once HermeticWiper disinda gozden kacan bir kural
+(CISA_261234_01) buldu.
+
+### Kapsam
+CISA_261234_01 (BRICKSTORM, AOT/derlenmis varyant)
+
+### Yontem
+$s0-$s5: UTF-16 (wide) formatinda dosya yollari, HermeticWiper'da
+kullanilan yontemle metne cevrilip "wide nocase" eklendi.
+$s6, $s7: duz metin (bir .NET debug baslik etiketi ve WebSocket
+protokol sabiti), nocase eklendi.
+$s8, $s9: sifir-bayt (null) ayiracli sistem cagrisi isim listeleri,
+metne cevrilmedi - ayirici baytlarin kaybi tam bayt eslesmesini
+bozabilirdi.
+$s10: 32 karakterlik hex kimlik, AES anahtarlariyla ayni mantikla
+degistirilmedi.
+
+## SISTEMATIK UTF-16 TARAMASI TAMAMLANDI
+
+234 hex blogu, depodeki TUM 9 kaynak dosyasi (rules/*.yar) uzerinde
+otomatik script ile tarandi. Sonuc: HermeticWiper (zaten hardened)
+disinda sadece 1 ek kural (CISA_261234_01) wide-encoded string
+icerdigi tespit edildi, o da simdi hardened edildi. Depoda baska
+gozden kacan wide-encoded kural KALMADIGI dogrulanmis oldu - tarama
+9/9 kaynak dosyasini kapsadi.
+
+## NIHAI GUNCEL HARDENED KURAL SAYISI: 24
+
+BRICKSTORM ailesinin tum 7 kurali artik degerlendirildi:
+_251165_02, _251155_01, _251217_03, _261234_01 (4 tanesi hardened)
+_251155_02, _251155_03, _251186_02 (3 tanesi opcode agirlikli, N/A)
