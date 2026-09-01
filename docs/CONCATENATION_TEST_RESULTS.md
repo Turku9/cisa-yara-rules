@@ -165,3 +165,38 @@ kapsami DISINDADIR. Cozum icin ya on-isleme/normalizasyon katmani
 bir analiz araci) ya da davranissal/dinamik analiz gerekir - ikisi de
 bu depo kapsaminda uygulanmamistir, ileriki bir asama icin oneri
 olarak kayit altina alinmistir.
+
+## Sistematik Tarama: SUBMARINE'in Tum Kaynak-Kodu Kurallari (2026-08-25)
+
+### Metodoloji
+Daha once sadece _03 test edilmisti. Bu turda kalan 4 kural da
+(_04, _05, _06, _07) tek tek, string parcalama teknigiyle test edildi.
+
+### Sonuc
+
+| Kural | Kosul Yapisi | Parcalama Sonucu |
+|---|---|---|
+| CISA_10454006_03 | all of them (12/12) | KACIRDI |
+| CISA_10454006_04 | 6 of them (7'den) | HALA ESLESTI (esik toleransi) |
+| CISA_10454006_05 | 6 of them (7'den) | HALA ESLESTI (esik toleransi) |
+| CISA_10454006_06 | all of them (10/10) | KACIRDI |
+| CISA_10454006_07 | all of them (3/3) | KACIRDI |
+
+### Onemli Ek Bulgu: Esik (N-of-M) Kosulunun Yan Etkisi
+_04 ve _05, "all of them" yerine "6 of them" (7 stringden) kosulu
+tasidigi icin, TEK bir string'in parcalanmasina karsi KAZARA
+dayanikli cikti - kalan 6 string zaten esigi karsiliyor. Bu BILINCLI
+bir guvenlik onlemi DEGILDIR, sadece kosul yapisinin tesadufi bir
+yan etkisidir. Saldirgan birden fazla string'i (2 veya daha fazla)
+ayni anda parcalarsa, bu kurallarin da kacirmasi beklenir - bu
+senaryo test edilmemistir.
+
+### Nihai Kapsam Ozeti
+Test edilen 5 SUBMARINE kaynak-kodu kuralindan 3'u (_03, _06, _07)
+tek string parcalamasina karsi ACIK sekilde savunmasiz. 2'si (_04, _05)
+esik kosulu sayesinde tek string parcalamasina karsi tesadufen
+dayanikli, ancak coklu parcalamaya karsi durumu bilinmiyor.
+
+LEMURLOOT ile birlikte, kaynak-kodu-tabanli tum 6 kuralin (LEMURLOOT +
+SUBMARINE _03/_04/_05/_06/_07) string parcalama riski ACISINDAN
+sistematik olarak TARANMIS ve BELGELENMIS durumdadir.
