@@ -154,3 +154,36 @@ buyuk olcude korunuyor.
 - CISA_10430311_03 (Meterpreter/ASPX webshell)
 - CISA_251155_01 (BRICKSTORM - Go paket yollari)
 - CISA_251217_03 (BRICKSTORM - Rust varyanti)
+
+## Meterpreter, RESURGE, LEMURLOOT, FIRESTARTER Ek Kurallar (2026-08-25)
+
+### Kapsam
+- CISA_10430311_02 (Meterpreter, fresh binary) - kismi hardening
+- CISA_25993211_01 (RESURGE backdoor) - tam hardening
+- CISA_10450442_01 (LEMURLOOT webshell) - tam hardening
+- CISA_261290_01 (FIRESTARTER injector) - kismi hardening
+
+### Degerlendirilip Hardening Uygulanmayan Kurallar
+- CISA_10430311_01 (Meterpreter) - tamamen x86 shellcode, metin string yok
+- CISA_261290_02 (FIRESTARTER_shellcode) - tamamen x86 shellcode, metin string yok
+
+Bu iki kural bilerek atlanmadi, incelendi ve hardening'e uygun olmadigi
+tespit edildi (tum string'ler binary opcode).
+
+### Dogrulama Testi
+
+| Kural | Orijinal (case testi) | Hardened (case testi) |
+|---|---|---|
+| CISA_25993211_01 (RESURGE) | KACIRDI | YAKALADI |
+
+## Guncel Hardened Kural Sayisi: 17
+- CISA_25993211_02 (SPAWNSLOTH)
+- PlayForESXi
+- CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
+- CISA_251165_02 (BRICKSTORM)
+- GRXBA
+- CISA_10430311_02, _03 (Meterpreter/ASPX - 2 kural)
+- CISA_251155_01, _251217_03 (BRICKSTORM - 2 kural)
+- CISA_25993211_01 (RESURGE)
+- CISA_10450442_01 (LEMURLOOT)
+- CISA_261290_01 (FIRESTARTER)
