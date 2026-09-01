@@ -88,3 +88,40 @@ Bu bulgunun operasyonel onemi, kaynak koduna dayali kurallarimizda
 (LEMURLOOT, SUBMARINE'in launcher script kurallari, GRXBA'nin help
 text'leri gibi) YUKSEK, derlenmis binary kurallarinda (Meterpreter,
 BRICKSTORM opcode kisimlari, RESURGE gibi) DUSUK/GECERSIZDIR.
+
+## Genisletme: SUBMARINE Shell Script Kurallarinda Dogrulama (2026-08-25)
+
+### Metodoloji
+LEMURLOOT'ta (ASPX kaynak kod) bulunan string parcalama riskinin,
+depodaki DIGER kaynak-kodu-tabanli kurallarda da gecerli olup
+olmadigi test edildi. SUBMARINE'in shell script kurallarindan biri
+(CISA_10454006_03) secildi, cunku bu da derlenmis binary degil,
+CALISAN kaynak koddur (#!/bin/sh betikleri).
+
+"base64 -d" komutu, shell degiskenleri kullanilarak parcalandi:
+    b="base"; c="64 -d"; echo $b$c |sh
+Bu, gercek bir shell script'te CALISAN, gecerli bir komut birlestirme
+teknigidir - saldirganin bunu gercekte kullanabilecegi kanitlanmis
+bir yontemdir (LEMURLOOT'taki VBScript "&" operatorunden farkli ama
+ayni mantik: kaynak kod calisma aninda birlesir, islevsellik korunur).
+
+### Sonuc
+
+| Test | Hardened Kural |
+|---|---|
+| Kontrol (bitisik "base64 -d") | ESLESTI |
+| Shell degiskeniyle parcalanmis | KACIRDI |
+
+### Dogrulanmis Kapsam
+String parcalama riski, su an ITIBARIYLE ASAGIDAKI kaynak-kodu-tabanli
+kurallarda GECERLI ve DOGRULANMIS kabul edilmelidir:
+- LEMURLOOT (CISA_10450442_01) - ASPX, dogrulandi
+- SUBMARINE launcher/SQL kurallari (CISA_10454006_03/04/05/06/07) -
+  shell script/SQL, _03 uzerinde dogrulandi, digerleri ayni formatta
+  oldugu icin ayni riski tasidigi varsayilmalidir (sistematik tek tek
+  test edilmedi)
+
+Bu risk, derlenmis binary kurallarda (Meterpreter, BRICKSTORM opcode
+kisimlari, FIRESTARTER, HermeticWiper, Ivanti EPMM .class dosyalari,
+RESURGE) GECERSIZDIR - derleyici string'leri programin veri bolumune
+sabit olarak yazar, calisma aninda "birlestirme" soz konusu degildir.
