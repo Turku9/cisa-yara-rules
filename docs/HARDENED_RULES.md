@@ -187,3 +187,35 @@ tespit edildi (tum string'ler binary opcode).
 - CISA_25993211_01 (RESURGE)
 - CISA_10450442_01 (LEMURLOOT)
 - CISA_261290_01 (FIRESTARTER)
+
+## HermeticWiper (2026-08-25)
+
+### Kapsam
+CISA_10375867_01 (HermeticWiper wiper malware)
+
+### Yontem - Farkli bir yaklasim
+Bu kuralin tum string'leri UTF-16 (wide) formatinda kodlanmis duz metin
+olarak tespit edildi (Windows registry yollari, surucu isimleri, yetki
+adlari), ancak orijinal kuralda hex byte olarak yazilmisti. Hex formatinda
+nocase eklenemez. Bunun yerine string'ler DUZ METIN olarak yeniden
+yazildi ve "wide nocase" modifier kombinasyonu eklendi - bu hem ayni
+baytlari arar (davranis degismedi) hem de artik buyuk/kucuk harf
+degisimine karsi dayanikli.
+
+### Test
+Hardened kural derleme ve calisma testinden basariyla gecti. Kural
+"N of them" yapisinda oldugu icin (tek string yeterli degil), izole
+tek-string testi yerine derleme/calisma dogrulamasi yapildi.
+
+## Guncel Hardened Kural Sayisi: 18
+- CISA_25993211_02 (SPAWNSLOTH)
+- PlayForESXi
+- CISA_10454006_01, _03, _04, _05, _06, _07 (SUBMARINE - 6 kural)
+- CISA_251165_02 (BRICKSTORM)
+- GRXBA
+- CISA_10430311_02, _03 (Meterpreter/ASPX - 2 kural)
+- CISA_251155_01, _251217_03 (BRICKSTORM - 2 kural)
+- CISA_25993211_01 (RESURGE)
+- CISA_10450442_01 (LEMURLOOT)
+- CISA_261290_01 (FIRESTARTER)
+- CISA_10375867_01 (HermeticWiper) - hex-to-wide-text donusumu ile
