@@ -219,3 +219,41 @@ tek-string testi yerine derleme/calisma dogrulamasi yapildi.
 - CISA_10450442_01 (LEMURLOOT)
 - CISA_261290_01 (FIRESTARTER)
 - CISA_10375867_01 (HermeticWiper) - hex-to-wide-text donusumu ile
+
+## Ivanti EPMM - Tum Aile (2026-08-25)
+
+### Kapsam
+5 kuralin tumu (CISA_251126_01 - 05) incelendi ve hardening uygulandi.
+
+### Yeni Bir Kategori: AES Anahtarlari
+Bu turda ilk kez, hex-digit ASCII metni olarak yazilmis SABIT SIFRELEME
+ANAHTARLARIYLA karsilasildi ($s7 in _03: "7c6a8867d728c3bb", $s9 in _05:
+"3c6e0b8a9c15224a"). Bunlara BILEREK nocase eklenmedi - base64 bloklariyla
+ayni mantik: anahtar degeri kaynak kodunda birebir kopyalanip yapistirilir,
+bir saldirganin harfleri rastgele degistirmesi gercekci bir senaryo degildir
+ve byte degerini degistirerek sifreleme/cozme islevini bozar.
+
+### Yeni Bir Durum: Java Constant Pool Uzunluk On-eki
+$s10 (_03) ve $s8 (_05), Java .class dosyalarinin ic formatinda
+(CONSTANT_Utf8), string'lerin basina 2 baytlik bir uzunluk degeri
+eklenir. Kesilmis/kismi bu on-ek baytindan dolayi bu string'ler
+hex formatinda birakildi - metne cevirip nocase eklemek tam bayt
+eslesmesini bozabilirdi.
+
+### Sonuc
+- CISA_251126_02: TAM hardening (10/10 string)
+- CISA_251126_03: KISMI (10/12, AES anahtari ve length-prefix haric)
+- CISA_251126_05: KISMI (11/13, AES anahtari ve length-prefix haric)
+- CISA_251126_01, _04: KISMI (2/8 - digerleri binary hash/checksum)
+
+## HARDENING TURU TAMAMLANDI - Nihai Ozet
+
+Depodeki 30 orijinal kuralin TAMAMI incelendi:
+- 23 kural hardened edildi (23 dosya, rules_hardened/ altinda)
+- 2 kural (Meterpreter _01, FIRESTARTER _02) tamamen shellcode
+  oldugu icin hardening'e uygun degil, degistirilmedi
+- 5 kural zaten iyi tasarlanmis (SUBMARINE _02 entropi tabanli) veya
+  hardening konusu SUBMARINE _06/_07'nin base64 bloklari gibi kismen
+  ele alindi
+
+Toplam hardened kural sayisi: 23
